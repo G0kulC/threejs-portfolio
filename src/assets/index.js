@@ -41,6 +41,9 @@ const retail_sales_forecasting = "/images/retail_sales_forecasting.png";
 const health_diet_ai = "/images/health_diet_ai.png";
 const jobai_agent = "/images/jobai_agent.png";
 const fruit_freshness_classifier = "/images/fruit_freshness_classifier.png";
+const ai_call_agent = "/images/ai_call_agent.png";
+const ai_qa_agent = "/images/ai_qa_agent.png";
+const docscope_ai = "/images/docscope_ai.png";
 
 export {
   givicert,
@@ -78,4 +81,7 @@ export {
   health_diet_ai,
   jobai_agent,
   fruit_freshness_classifier,
+  ai_call_agent,
+  ai_qa_agent,
+  docscope_ai,
 };

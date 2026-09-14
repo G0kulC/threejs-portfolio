@@ -29,6 +29,9 @@ import {
   health_diet_ai,
   jobai_agent,
   fruit_freshness_classifier,
+  ai_call_agent,
+  ai_qa_agent,
+  docscope_ai,
 } from "../assets";
 
 export const navLinks = [
@@ -262,16 +265,84 @@ const testimonials = [
   },
 ];
 
-const projects = [
+const productionProjects = [
+  {
+    name: "AI Call Agent",
+    category_number: "01",
+    category: "VOICE / CALL AGENTS",
+    subtitle: "AGENTIC AI & VOICE AUTOMATION",
+    role: "Full Maintainer · End-to-End AI Workflow & Backend",
+    company: "KG Invicta Services",
+    status: "Active Production",
+    description:
+      "Real-time AI voice agents for handling dynamic conversations, with configurable personas, knowledge, memory, workflows, and tool/API interactions.",
+    tags: [
+      { name: "python", color: "blue-text-gradient" },
+      { name: "llms", color: "pink-text-gradient" },
+      { name: "real-time voice", color: "green-text-gradient" },
+      { name: "rag", color: "orange-text-gradient" },
+      { name: "memory", color: "blue-text-gradient" },
+      { name: "agents", color: "pink-text-gradient" },
+    ],
+    image: ai_call_agent,
+    project_date: "2025-01-01T10:00:00Z",
+  },
+  {
+    name: "QA Agent",
+    category_number: "02",
+    category: "AI QA AGENT",
+    subtitle: "AGENTIC AI & AUTOMATED QA",
+    role: "Full Maintainer · End-to-End AI Workflow & Backend",
+    company: "KG Invicta Services",
+    status: "Active Production",
+    description:
+      "An agentic AI system that evaluates conversations, analyzes agent performance, and generates automated quality assessments and insights.",
+    tags: [
+      { name: "python", color: "blue-text-gradient" },
+      { name: "llms", color: "pink-text-gradient" },
+      { name: "agentic ai", color: "green-text-gradient" },
+      { name: "evaluation", color: "orange-text-gradient" },
+      { name: "analytics", color: "blue-text-gradient" },
+    ],
+    image: ai_qa_agent,
+    project_date: "2025-03-01T10:00:00Z",
+  },
+  {
+    name: "DOCSCOPE",
+    category_number: "03",
+    category: "DOCUMENT INTELLIGENCE & AI",
+    subtitle: "DOCUMENT INTELLIGENCE & AI",
+    role: "Full Maintainer · End-to-End AI Workflow & Backend",
+    company: "KG Invicta Services",
+    status: "Active Production",
+    description:
+      "An AI document-processing pipeline combining OCR, document classification, layout analysis, extraction, and structured processing.",
+    tags: [
+      { name: "python", color: "blue-text-gradient" },
+      { name: "ocr", color: "orange-text-gradient" },
+      { name: "computer vision", color: "green-text-gradient" },
+      { name: "llms", color: "pink-text-gradient" },
+      { name: "fastapi", color: "blue-text-gradient" },
+      { name: "document ai", color: "green-text-gradient" },
+    ],
+    image: docscope_ai,
+    project_date: "2025-02-01T10:00:00Z",
+  },
+];
+
+const gitProjects = [
   {
     name: "Retail Sales Forecasting",
+    category_number: "04",
+    category: "TIME-SERIES & MACHINE LEARNING",
+    subtitle: "MACHINE LEARNING & FORECASTING",
     description:
       "End-to-end machine learning pipeline for retail sales forecasting using XGBoost, LSTM, and Optuna hyperparameter tuning. Features time-series analysis, seasonality decomposition, and an interactive dashboard for sales trend visualization.",
     tags: [
       { name: "python", color: "blue-text-gradient" },
       { name: "xgboost", color: "green-text-gradient" },
       { name: "lstm", color: "pink-text-gradient" },
-      { name: "machine learning", color: "blue-text-gradient" },
+      { name: "time-series", color: "blue-text-gradient" },
       { name: "pandas", color: "green-text-gradient" },
     ],
     image: retail_sales_forecasting,
@@ -280,6 +351,9 @@ const projects = [
   },
   {
     name: "HealthDiet AI",
+    category_number: "05",
+    category: "GENERATIVE AI & RAG",
+    subtitle: "GENERATIVE AI & RAG",
     description:
       "An AI-powered health and diet assistant that provides personalized meal plans, nutritional analysis, and diet recommendations using LLMs and RAG. Integrates calorie tracking, macro breakdown, and real-time AI health coaching.",
     tags: [
@@ -295,6 +369,9 @@ const projects = [
   },
   {
     name: "JobAI Agent",
+    category_number: "06",
+    category: "AGENTIC AI & AUTOMATION",
+    subtitle: "AGENTIC AI & AUTOMATION",
     description:
       "An autonomous AI job search agent that automates job discovery, resume tailoring, ATS scoring, and application tracking. Uses LLM-powered resume analysis, job matching algorithms, and an AI interview preparation assistant.",
     tags: [
@@ -310,6 +387,9 @@ const projects = [
   },
   {
     name: "Fruit Freshness Classifier",
+    category_number: "07",
+    category: "COMPUTER VISION & ML",
+    subtitle: "COMPUTER VISION & TRANSFER LEARNING",
     description:
       "Automated fruit grading system using Transfer Learning (CNN with ResNet backbone) and K-Nearest Neighbors. Features image preprocessing, model comparison, confidence scoring, and a SQLite-based prediction history for batch inference.",
     tags: [
@@ -324,6 +404,8 @@ const projects = [
     project_date: "2025-06-01T10:00:00Z",
   },
 ];
+
+const projects = [...productionProjects, ...gitProjects];
 
 const socialLinks = [
   {
@@ -359,6 +441,8 @@ export {
   experiences,
   testimonials,
   projects,
+  productionProjects,
+  gitProjects,
   socialLinks,
   personalDetails,
 };
