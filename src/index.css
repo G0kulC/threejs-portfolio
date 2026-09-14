@@ -406,6 +406,21 @@ svg { flex-shrink: 0; }
   .site-footer .mono { order: 3; flex-basis: 100%; font-size: 7px; }
   .site-footer .text-link { margin-left: auto; }
 }
+.site-preloader { position: fixed; inset: 0; z-index: 999999; background: #101211; display: flex; align-items: center; justify-content: center; padding: 24px; user-select: none; pointer-events: all; }
+.preloader-bg-grid { position: absolute; inset: 0; background-image: linear-gradient(#a8c2b106 1px, transparent 1px), linear-gradient(90deg, #a8c2b106 1px, transparent 1px); background-size: 64px 64px; mask-image: radial-gradient(circle at center, black 40%, transparent 80%); -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%); z-index: 1; }
+.preloader-content { position: relative; z-index: 2; width: min(100%, 420px); display: flex; flex-direction: column; gap: 28px; }
+.preloader-brand { display: flex; align-items: center; justify-content: space-between; }
+.preloader-wordmark { font-weight: 750; font-size: 32px; letter-spacing: -.085em; color: var(--text); }
+.preloader-wordmark span { color: var(--accent); }
+.preloader-pill { font-size: 9px; letter-spacing: .12em; color: var(--accent); background: rgba(146, 237, 196, 0.08); border: 1px solid rgba(146, 237, 196, 0.22); padding: 5px 12px; border-radius: 999px; display: inline-flex; align-items: center; gap: 7px; }
+.preloader-progress-box { display: flex; flex-direction: column; gap: 12px; }
+.preloader-meta { display: flex; justify-content: space-between; align-items: center; font-size: 10px; letter-spacing: .1em; font-family: var(--mono); }
+.preloader-status { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.preloader-percent { color: var(--accent); font-weight: 600; min-width: 38px; text-align: right; }
+.preloader-bar-track { width: 100%; height: 2px; background: var(--line); position: relative; overflow: hidden; border-radius: 999px; }
+.preloader-bar-fill { height: 100%; background: var(--accent); box-shadow: 0 0 14px var(--accent); transition: width 0.08s linear; }
+.preloader-footer { display: flex; justify-content: space-between; font-size: 8px; color: #657167; letter-spacing: .12em; border-top: 1px solid var(--line); padding-top: 14px; font-family: var(--mono); }
+
 html[data-motion="off"] { scroll-behavior: auto; }
 html[data-motion="off"] *, html[data-motion="off"] *::before, html[data-motion="off"] *::after { animation: none !important; transition: none !important; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
