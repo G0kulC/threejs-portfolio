@@ -14,9 +14,9 @@ export default function Hero() {
   const ref = useRef(null);
   const { enabled } = useMotionPreference();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const sculptureY = useTransform(scrollYProgress, [0, 1], [0, 110]);
-  const textY = useTransform(scrollYProgress, [0, 1], [0, 65]);
-  const rotate = useTransform(scrollYProgress, [0, 1], [0, 20]);
+  const sculptureY = useTransform(scrollYProgress, [0, 1], [0, 36]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 48]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, 15]);
   return <section className="hero" id="home" ref={ref}>
     <div className="hero-grid" aria-hidden="true" />
     <div className="shell hero-inner">
@@ -30,11 +30,13 @@ export default function Hero() {
         </p>
         <div className="hero-buttons"><a href="#projects" className="button button-primary">Explore my work <FiArrowDownRight /></a><a className="text-link" href={personalDetails.resume_link} target="_blank" rel="noopener noreferrer">View résumé <FiArrowUpRight /></a></div>
       </motion.div>
-      <motion.div className="hero-art" style={{ y: enabled ? sculptureY : 0, rotate: enabled ? rotate : 0 }} aria-hidden="true">
-        <img className="neural-fallback" src="/images/neural-form.webp" alt="" width="1024" height="1024" fetchPriority="high" />
-        {enabled && <SceneBoundary><Suspense fallback={null}><NeuralCanvas /></Suspense></SceneBoundary>}
-      </motion.div>
-      <div className="art-caption mono" aria-hidden="true"><span className="crosshair">+</span> CURRENTLY FOCUSED ON<br /><span>GENAI · AGENTS · RAG</span></div>
+      <div className="hero-art-stage" aria-hidden="true">
+        <motion.div className="hero-art" style={{ y: enabled ? sculptureY : 0, rotate: enabled ? rotate : 0 }}>
+          <img className="neural-fallback" src="/images/neural-form.webp" alt="" width="1024" height="1024" fetchpriority="high" />
+          {enabled && <SceneBoundary><Suspense fallback={null}><NeuralCanvas /></Suspense></SceneBoundary>}
+        </motion.div>
+        <div className="art-caption mono"><span className="crosshair">+</span> CURRENTLY FOCUSED ON<br /><span>GENAI · AGENTS · RAG</span></div>
+      </div>
       <div className="hero-bottom">
         <div className="hero-bottom-inner">
           <div className="current-position">
