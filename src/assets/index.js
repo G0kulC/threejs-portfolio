@@ -33,6 +33,7 @@ import gmail from "./social/gmail.png";
 import instagram from "./social/instagram.png";
 
 // Awards
+const employee_of_the_year = "/images/employee_of_the_year.jpg";
 const best_teamof_year = "/images/best_teamof_year.webp";
 const givicert = "/images/givicert.webp";
 
@@ -46,6 +47,7 @@ const ai_qa_agent = "/images/ai_qa_agent.png";
 const docscope_ai = "/images/docscope_ai.png";
 
 export {
+  employee_of_the_year,
   givicert,
   best_teamof_year,
   live,

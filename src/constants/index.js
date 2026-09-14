@@ -24,7 +24,7 @@ import {
   gmail,
   instagram,
   best_teamof_year,
-  givicert,
+  employee_of_the_year,
   retail_sales_forecasting,
   health_diet_ai,
   jobai_agent,
@@ -97,31 +97,39 @@ const services = [
 
 const awards = [
   {
-    title: "Best Team of the Year",
-    company_name: "DotWorld Technologies",
+    title: "Employee of the Year",
+    company_name: "Dotworld Technologies Pvt Ltd",
     location: "Coimbatore",
+    type: "ANNUAL EXCELLENCE",
+    summary:
+      "Honoured as Employee of the Year 2025 at Dotworld Technologies for mastering new AI tools, accelerating delivery timelines, and engineering high-impact production solutions.",
     points: [
-      "Awarded 'Best Team of the Year' for outstanding collaboration and dedication.",
-      "Recognized for driving impactful results through teamwork and innovation.",
-      "Celebrates the collective efforts of a talented and driven group.",
-      "Grateful to my team and company for their support and inspiration.",
+      "Honoured as Employee of the Year 2025 at Dotworld Technologies Pvt Ltd.",
+      "Recognized for mastering new AI tools, accelerating delivery timelines, and transforming complex obstacles into scalable production systems.",
+      "Demonstrated consistent discipline, high-impact technical execution, and dedication.",
+      "Celebrated during Foundation Day Awards 2025.",
+    ],
+    year_of_award: "2025",
+    image: employee_of_the_year,
+    post_link:
+      "https://www.linkedin.com/posts/gokul-dev_dotworld-employeeoftheyear-software-activity-7398707561878843392-IXIG?utm_source=share&utm_medium=member_desktop&rcm=ACoAADtv5X8BNwu98s9p-aHqB31di90C6E_jikc",
+  },
+  {
+    title: "Best Team of the Year",
+    company_name: "Dotworld Technologies",
+    location: "Coimbatore",
+    type: "TEAM AWARD",
+    summary:
+      "Recognized as Best Team of the Year 2024 for relentless pursuit of engineering excellence, collaboration, and impactful problem-solving alongside Ramesh Baskaran.",
+    points: [
+      "Awarded 'Best Team of the Year' for outstanding collaboration, technical synergy, and dedication.",
+      "Partnered with core teammates including Ramesh Baskaran to deliver mission-critical milestones.",
+      "Celebrates the collective efforts, problem-solving sessions, and shared technical vision of a high-performing engineering group.",
     ],
     year_of_award: "2024",
     image: best_teamof_year,
-  },
-  // Python Programming – GUVI (Google for Education Partner, ISO 9001-27001 Certified)
-  {
-    title: "Python Programming",
-    company_name: "GUVI (ISO 9001-27001 Certified)",
-    location: "Coimbatore",
-    points: [
-      "Gokul C is awarded the certificate of achievement for completing Python Programming.",
-      "Covered topics include data structures, algorithms, and OOP.",
-      "Certificate recognizes dedication, commitment, and expertise.",
-      "Part of ongoing efforts to enhance programming skills for career growth.",
-    ],
-    year_of_award: "2022",
-    image: givicert,
+    post_link:
+      "https://www.linkedin.com/posts/gokul-dev_teamwork-gratitude-success-activity-7262193842446057476-XDBC?utm_source=share&utm_medium=member_desktop&rcm=ACoAADtv5X8BNwu98s9p-aHqB31di90C6E_jikc",
   },
 ];
 
