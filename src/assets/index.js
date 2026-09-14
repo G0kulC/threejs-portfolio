@@ -8,35 +8,20 @@ import live from "./live.png";
 import menu from "./menu.svg";
 import close from "./close.svg";
 
-import css from "./tech/css.png";
 import docker from "./tech/docker.png";
-import figma from "./tech/figma.png";
 import git from "./tech/git.png";
-import html from "./tech/html.png";
 import fastapi from "./tech/fastapi.png";
 import javascript from "./tech/javascript.png";
 import postgresql from "./tech/postgresql.png";
 import nodejs from "./tech/nodejs.png";
 import reactjs from "./tech/reactjs.png";
-import redux from "./tech/redux.png";
 import tailwind from "./tech/tailwind.png";
-import typescript from "./tech/typescript.png";
 import threejs from "./tech/threejs.svg";
 import mysql from "./tech/mysql.png";
 import django from "./tech/django.png";
 
-import meta from "./company/meta.png";
-import novitech from "./company/novitech.png";
 import dotworld from "./company/dotworld.png";
 import accenttechnosoft from "./company/accenttechnosoft.png";
-
-const crowdfunding = "/images/crowdfunding.webp";
-const quora_project = "/images/quora-project.webp";
-const portfoliomailer = "/images/portfoliomailer.webp";
-const blog_web = "/images/blog_web.webp";
-const portfolio_cms = "/images/portfolio_cms.webp";
-const backenkarchitecture = "/images/backenkarchitecture.webp";
-const threejs_portfolio = "/images/threejs_portfolio.webp";
 
 import elonmusk from "./peoples/musk.jpeg";
 import apj_kalam from "./peoples/apj-kalam.jpeg";
@@ -51,13 +36,15 @@ import instagram from "./social/instagram.png";
 const best_teamof_year = "/images/best_teamof_year.webp";
 const givicert = "/images/givicert.webp";
 
+// Project images
+const retail_sales_forecasting = "/images/retail_sales_forecasting.png";
+const health_diet_ai = "/images/health_diet_ai.png";
+const jobai_agent = "/images/jobai_agent.png";
+const fruit_freshness_classifier = "/images/fruit_freshness_classifier.png";
 
 export {
-  threejs_portfolio,
   givicert,
   best_teamof_year,
-  backenkarchitecture,
-  portfolio_cms,
   live,
   logo,
   backend,
@@ -67,29 +54,19 @@ export {
   github,
   menu,
   close,
-  css,
   docker,
-  figma,
   git,
-  html,
   fastapi,
   javascript,
   postgresql,
   nodejs,
   reactjs,
-  redux,
   tailwind,
-  typescript,
   threejs,
-  meta,
-  novitech,
-  dotworld,
-  accenttechnosoft,
-  crowdfunding,
-  quora_project,
-  blog_web,
   mysql,
   django,
+  dotworld,
+  accenttechnosoft,
   elonmusk,
   apj_kalam,
   sundarpichai,
@@ -97,5 +74,8 @@ export {
   github_icon,
   gmail,
   instagram,
-  portfoliomailer
+  retail_sales_forecasting,
+  health_diet_ai,
+  jobai_agent,
+  fruit_freshness_classifier,
 };

@@ -36,7 +36,7 @@ function Sculpture({ touch }) {
     group.current.rotation.z = -0.35 + Math.sin(t * 0.12) * 0.12;
     group.current.rotation.x = MathUtils.damp(group.current.rotation.x, 0.35 + (!touch ? state.pointer.y * 0.13 : 0), 3, delta);
   });
-  return <group ref={group} rotation={[0.35, 0, -0.35]}><points><bufferGeometry><bufferAttribute attach="attributes-position" count={positions.length / 3} array={positions} itemSize={3} /><bufferAttribute attach="attributes-color" count={colors.length / 3} array={colors} itemSize={3} /></bufferGeometry><pointsMaterial vertexColors size={touch ? 0.014 : 0.012} sizeAttenuation transparent opacity={0.88} depthWrite={false} /></points></group>;
+  return <group ref={group} rotation={[0.35, 0, -0.35]} scale={touch ? 0.74 : 0.78}><points><bufferGeometry><bufferAttribute attach="attributes-position" count={positions.length / 3} array={positions} itemSize={3} /><bufferAttribute attach="attributes-color" count={colors.length / 3} array={colors} itemSize={3} /></bufferGeometry><pointsMaterial vertexColors size={touch ? 0.014 : 0.012} sizeAttenuation transparent opacity={0.88} depthWrite={false} /></points></group>;
 }
 
 export default function NeuralCanvas() {
