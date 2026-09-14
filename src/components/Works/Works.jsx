@@ -1,168 +1,27 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-
-import { styles } from "../../styles";
-import { github, live } from "../../assets";
-import { SectionWrapper } from "../../hoc";
+import { useState } from "react";
+import { FiArrowUpRight, FiArrowDown, FiMinus } from "react-icons/fi";
 import { projects } from "../../constants";
-import { fadeIn, textVariant } from "../../utils/motion";
-import ViewMoreButton from "../buttons/ViewMore";
-import TimeSince from "../TimeSince/TimeSince";
+import { Reveal, Parallax, SectionHeading } from "../Motion";
 
-// Sort projects by date
-projects.sort((a, b) => {
-  const dateA = new Date(a.project_date);
-  const dateB = new Date(b.project_date);
-  return dateB - dateA;
-});
-
-const ProjectCard = ({
-  index,
-  name,
-  description,
-  tags,
-  image,
-  source_code_link,
-  project_live_link,
-  project_date,
-  isInitialSet,
-}) => {
-  const cardContent = (
-    <div className="bg-tertiary p-4 sm:p-5 rounded-2xl w-full sm:w-[360px]">
-      <div className="relative w-full h-[180px] sm:h-[230px]">
-        <img
-          src={image}
-          alt="project_image"
-          className="w-full h-full object-cover rounded-2xl"
-        />
-        {source_code_link && (
-          <div className="absolute top-2 right-2 sm:top-3 sm:right-3 flex">
-            <div
-              onClick={() => window.open(source_code_link, "_blank")}
-              className="black-gradient w-8 h-8 sm:w-10 sm:h-10 rounded-full flex justify-center items-center cursor-pointer"
-            >
-              <img
-                src={github}
-                alt="source code"
-                className="w-1/2 h-1/2 object-contain"
-              />
-            </div>
-          </div>
-        )}
-        {project_live_link && (
-          <div className="absolute top-2 left-2 sm:top-3 sm:left-3 flex">
-            <div
-              onClick={() => window.open(project_live_link, "_blank")}
-              className="bg-white w-8 h-8 sm:w-10 sm:h-10 rounded-full flex justify-center items-center cursor-pointer"
-            >
-              <img
-                src={live}
-                alt="live link"
-                className="w-1/2 h-1/2 object-contain"
-              />
-            </div>
-          </div>
-        )}
-      </div>
-      <div className="mt-3 sm:mt-4">
-        <h3 className="text-white font-bold text-base sm:text-[24px]">
-          {name}
-        </h3>
-        <p className="mt-2 text-secondary text-xs sm:text-sm line-clamp-3 sm:line-clamp-6">
-          {description}
-        </p>
-      </div>
-      <div className="mt-3 flex flex-wrap gap-1 sm:gap-2">
-        {tags.map((tag) => (
-          <p
-            key={`${name}-${tag.name}`}
-            className={`text-[10px] sm:text-[14px] ${tag.color}`}
-          >
-            #{tag.name}
-          </p>
-        ))}
-      </div>
-      {project_date && (
-        <div className="mt-3 sm:mt-4">
-          <p className="text-secondary text-xs sm:text-sm">
-            <TimeSince dateString={project_date} />
-          </p>
-        </div>
-      )}
-    </div>
-  );
-
-  return isInitialSet ? (
-    <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
-      {cardContent}
-    </motion.div>
-  ) : (
-    <div>{cardContent}</div>
-  );
+const summaries = {
+  "Portfolio CMS": "A flexible Django backend for managing projects, skills, and experience—with REST APIs and JWT authentication.",
+  "Backend Architecture": "A structured FastAPI foundation, built around modular routers, models, schemas, and services.",
+  "PortfolioMailer-Backend": "An asynchronous contact-form service built with FastAPI, email notifications, and Docker deployment.",
+  "Personal Portfolio": "An interactive Three.js portfolio exploring the intersection of code, motion, and visual storytelling.",
 };
+const featured = [projects[0], projects[2], projects[1], projects[3]];
+const archived = projects.filter(project => !featured.includes(project));
 
-const Projects = () => {
-  const [visibleCount, setVisibleCount] = useState(6);
-  const [showAll, setShowAll] = useState(false);
-
-  const showMoreProjects = () => {
-    if (visibleCount + 3 >= projects.length) {
-      setVisibleCount(projects.length);
-      setShowAll(true);
-    } else {
-      setVisibleCount((prevCount) => prevCount + 3);
-    }
-  };
-
-  const closeUpProjects = () => {
-    setVisibleCount(6);
-    setShowAll(false);
-  };
-
-  return (
-    <>
-      <motion.div variants={textVariant()} className="px-4 sm:px-0">
-        <p className={`${styles.sectionSubText} text-center sm:text-left`}>
-          What I've built so far
-        </p>
-        <h2 className={`${styles.sectionHeadText} text-center sm:text-left`}>
-          Projects.
-        </h2>
-      </motion.div>
-
-      <motion.p
-        variants={fadeIn("", "", 0.1, 1)}
-        className="mt-3 text-secondary text-sm sm:text-base max-w-full sm:max-w-3xl leading-[20px] sm:leading-[30px] px-4 sm:px-0 text-center sm:text-left"
-      >
-        <div className="w-full flex">
-          These projects highlight my skills and experience through real-world
-          examples, showcasing my ability to solve complex problems, work with
-          various technologies, and manage projects effectively. Each includes a
-          brief description with links to code repositories and live demos.
-        </div>
-      </motion.p>
-
-      <div className="mt-8 sm:mt-20 flex flex-wrap gap-5 sm:gap-7 justify-center">
-        {projects.slice(0, visibleCount).map((project, index) => (
-          <ProjectCard
-            key={`project-${index}`}
-            index={index}
-            isInitialSet={index < 6}
-            {...project}
-          />
-        ))}
-      </div>
-
-      <div className="flex justify-center mt-10">
-        {visibleCount < projects.length && !showAll && (
-          <ViewMoreButton onClick={showMoreProjects} label="View More" />
-        )}
-        {showAll && (
-          <ViewMoreButton onClick={closeUpProjects} label="View Less" />
-        )}
-      </div>
-    </>
-  );
-};
-
-export default SectionWrapper(Projects, "projects");
+function ProjectCard({ project, index }) {
+  return <Reveal className={`project-card project-${index}`} delay={index % 2 * 0.1}>
+    <div className="project-visual"><div className="project-visual-top mono"><span>{index === 3 ? "CREATIVE DEVELOPMENT" : "BACKEND ENGINEERING"}</span><span>0{index + 1}</span></div><Parallax distance={24} className="project-image-wrap"><img src={project.image} alt={`${project.name} project preview`} width="800" height="500" loading="lazy" /></Parallax><a className="project-open" href={project.source_code_link} target="_blank" rel="noopener noreferrer" aria-label={`View ${project.name} source code`}><FiArrowUpRight /></a><span className="project-visual-bottom mono">{project.tags.map(tag => tag.name.toUpperCase()).join(" / ")}</span></div>
+    <div className="project-title-row"><h3>{project.name === "PortfolioMailer-Backend" ? "Portfolio Mailer" : project.name}</h3><span className="mono muted">{new Date(project.project_date).getUTCFullYear()}</span></div><p className="project-summary">{summaries[project.name]}</p><div className="project-links"><a href={project.source_code_link} target="_blank" rel="noopener noreferrer">Source code <FiArrowUpRight /></a>{project.project_live_link && <a href={project.project_live_link} target="_blank" rel="noopener noreferrer">Live project <FiArrowUpRight /></a>}</div>
+  </Reveal>;
+}
+export default function Projects() {
+  const [expanded, setExpanded] = useState(false);
+  return <section id="projects" className="section shell projects-section"><SectionHeading number="02" label="SELECTED PAST WORK" title={<>Built with purpose<span className="accent">.</span></>}>A selection of backend systems and web experiences that shaped my engineering foundation.</SectionHeading><div className="projects-grid">{featured.map((project, index) => <ProjectCard key={project.name} project={project} index={index} />)}</div>
+    <div className="archive-header"><span className="mono muted">MORE EXPERIMENTS. MORE EXPLORATION.</span><button className="text-link" aria-expanded={expanded} aria-controls="project-archive" onClick={() => setExpanded(!expanded)}>{expanded ? "Close archive" : `Explore the archive (${archived.length})`}{expanded ? <FiMinus /> : <FiArrowDown />}</button></div>
+    <div id="project-archive" hidden={!expanded}>{archived.map(project => <article className="archive-project" key={project.name}><img src={project.image} alt={`${project.name} preview`} width="150" height="100" loading="lazy" /><div><span className="mono muted">{new Date(project.project_date).getUTCFullYear()} / PAST PROJECT</span><h3>{project.name}</h3><p>{project.description}</p><div className="tags">{project.tags.map(tag => <span key={tag.name}>{tag.name}</span>)}</div></div>{project.source_code_link ? <a className="round-link" href={project.source_code_link} target="_blank" rel="noopener noreferrer" aria-label={`View ${project.name} source code`}><FiArrowUpRight /></a> : <span className="mono muted">ARCHIVED</span>}</article>)}</div>
+  </section>;
+}

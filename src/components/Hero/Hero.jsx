@@ -1,60 +1,38 @@
-import { motion } from "framer-motion";
-import { styles } from "../../styles";
+import { Component, lazy, Suspense, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { FiArrowDown, FiArrowDownRight, FiArrowUpRight } from "react-icons/fi";
 import { personalDetails } from "../../constants";
-import TypingEffect from "./TypingEffect";
-import React, { Suspense, lazy } from "react";
+import { useMotionPreference } from "../Motion";
 
-const ComputersCanvas = lazy(() => import("../canvas/Computers"));
-
-const Hero = () => {
-  return (
-    <section className="relative w-full h-screen mx-auto">
-      <div
-        className={`absolute inset-0 top-[120px] max-w-7xl mx-auto ${styles.paddingX} flex flex-row items-start gap-5`}
-      >
-        <div className="flex flex-col justify-center items-center mt-5">
-          <div className="w-5 h-5 rounded-full bg-[#915EFF]" />
-          <div className="w-1 sm:h-80 h-40 violet-gradient" />
-        </div>
-
-        <div>
-          <h1 className={`${styles.heroHeadText} text-white`}>
-            Hi, I'm{" "}
-            <span className="text-[#915EFF]">{personalDetails.full_name}</span>
-          </h1>
-          <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-            Passionate{" "}
-            {
-              <i className="text-[#FCB900]">
-                <TypingEffect roles={personalDetails.roles} />
-              </i>
-            }
-          </p>
-        </div>
-      </div>
-
-      {/* Lazy load the 3D canvas */}
-        <ComputersCanvas />
-
-      <div className="absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center">
-        <a href="#about">
-          <div className="w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2">
-            <motion.div
-              animate={{
-                y: [0, 24, 0],
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                repeatType: "loop",
-              }}
-              className="w-3 h-3 rounded-full bg-secondary mb-1"
-            />
-          </div>
-        </a>
-      </div>
-    </section>
-  );
-};
-
-export default Hero;
+const NeuralCanvas = lazy(() => import("../canvas/NeuralCanvas"));
+class SceneBoundary extends Component {
+  state = { failed: false };
+  static getDerivedStateFromError() { return { failed: true }; }
+  render() { return this.state.failed ? null : this.props.children; }
+}
+export default function Hero() {
+  const ref = useRef(null);
+  const { enabled } = useMotionPreference();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const sculptureY = useTransform(scrollYProgress, [0, 1], [0, 170]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 65]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, 24]);
+  return <section className="hero" id="home" ref={ref}>
+    <div className="hero-grid" aria-hidden="true" />
+    <div className="shell hero-inner">
+      <div className="hero-topline"><span className="eyebrow">GOKUL CHANDRASEKARAN</span><span className="mono hero-edition">PORTFOLIO / {new Date().getFullYear()}</span></div>
+      <motion.div className="hero-copy" style={{ y: enabled ? textY : 0 }}>
+        <p className="role-label"><span className="status-dot" /> AI ENGINEER & DATA SCIENTIST</p>
+        <h1>Turning data<br />into <span>intelligence.</span></h1>
+        <p className="hero-description">A curious mind. An engineering mindset.<br />Connecting data, code, and real-world possibilities.</p>
+        <div className="hero-buttons"><a href="#projects" className="button button-primary">Explore my work <FiArrowDownRight /></a><a className="text-link" href={personalDetails.resume_link} target="_blank" rel="noopener noreferrer">View résumé <FiArrowUpRight /></a></div>
+      </motion.div>
+      <motion.div className="hero-art" style={{ y: enabled ? sculptureY : 0, rotate: enabled ? rotate : 0 }} aria-hidden="true">
+        <img className="neural-fallback" src="/images/neural-form.webp" alt="" width="1024" height="1024" fetchPriority="high" />
+        {enabled && <SceneBoundary><Suspense fallback={null}><NeuralCanvas /></Suspense></SceneBoundary>}
+      </motion.div>
+      <div className="art-caption mono" aria-hidden="true"><span className="crosshair">+</span> A LITTLE STRUCTURE.<br /><span>A LOT OF POSSIBILITY.</span></div>
+      <div className="hero-bottom"><div className="current-position"><span className="status-dot" /><div><span className="mono muted">CURRENTLY BUILDING AT</span><p>KG Invicta Services <FiArrowUpRight /></p></div></div><a className="scroll-cue mono" href="#about">SCROLL TO EXPLORE <span><FiArrowDown /></span></a><span className="hero-coordinate mono">IDEAS → INTELLIGENCE</span></div>
+    </div>
+  </section>;
+}
