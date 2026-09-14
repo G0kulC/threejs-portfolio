@@ -1,4 +1,3 @@
-import { title } from "framer-motion/client";
 import {
   python,
   backend,
@@ -66,9 +65,11 @@ export const navLinks = [
 const personalDetails = {
   name: "Gokul C",
   full_name: "Gokul Chandrasekaran",
-  roles: ["Software Developer", "Backend Developer", "Python Developer"],
+  roles: ["AI Engineer", "Data Scientist"],
+  current_title: "AI Engineer & Data Scientist",
+  current_company: "KG Invicta Services",
   description:
-    "Dynamic Software Developer skilled in building high-performance APIs,scalable microservices, and real-time image processing using Python,FastAPI, and PostgreSQL.Specializes in database optimization andautomation to boost efficiency and reliability.Collaborativeproblem-solver with a track record of delivering scalable,business-aligned solutions.",
+    "I’m Gokul Chandrasekaran, an AI Engineer & Data Scientist at KG Invicta Services. My foundation is in Python, backend systems, and building software that solves real problems. Today, I bring that engineering mindset to the intersection of data and artificial intelligence.",
   email: "gggokul865@gmail.com",
   linkedin: "https://www.linkedin.com/in/gokul-dev/",
   github: "https://github.com/G0kulC",
@@ -180,12 +181,19 @@ const technologies = [
 
 const experiences = [
   {
+    title: "AI Engineer & Data Scientist",
+    company_name: "KG Invicta Services",
+    date: "Current",
+    current: true,
+    points: ["Working at the intersection of AI engineering and data science, with a foundation in Python and backend development."],
+  },
+  {
     title: "Software Developer",
     company_name: "DotWorld Technologies",
     icon: dotworld,
     link: "https://dotworld.in/",
     iconBg: "#383E56",
-    date: "August 2023 - Present",
+    date: "Joined August 2023 · Previous role",
     points: [
       "API Optimization: Designed and optimized APIs using FastAPI and PostgreSQL, boosting application responsiveness by 50%.",
       "Microservices Development: Spearheaded the creation of scalable microservices architecture, enhancing modularity across projects.",
@@ -423,7 +431,7 @@ const socialLinks = [
   {
     username: "gggokul865@gmail.com",
     platform: "Email",
-    url: "mailto:gggokul865@gmail",
+    url: "mailto:gggokul865@gmail.com",
     image: gmail,
   },
   {

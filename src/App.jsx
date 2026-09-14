@@ -1,50 +1,22 @@
-import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import BackToTopButton from "./components/Resume/GetResume";
 import "react-toastify/dist/ReactToastify.css";
+import { MotionProvider } from "./components/Motion";
+import Navbar from "./components/Navbar/Navbar";
+import Hero from "./components/Hero/Hero";
+import About from "./components/About/About";
+import Projects from "./components/Works/Works";
+import Experience from "./components/Experience/Experience";
+import Tech from "./components/Tech/Tech";
+import Awards from "./components/Awards/Award";
+import Contact from "./components/Contact/Contact";
+import Footer from "./components/Footer/Footer";
 
-import {
-  About,
-  AwardSection,
-  Contact,
-  Experience,
-  Hero,
-  Navbar,
-  Tech,
-  Projects,
-  StarsCanvas,
-  Footer,
-} from "./components";
-
-const App = () => {
-  return (
-    <BrowserRouter>
-      <div className="relative z-0 bg-primary">
-        <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
-          <Navbar />
-          <Hero />
-        </div>
-        <About />
-        <Experience />
-        <AwardSection />
-        <Tech />
-        <Projects />
-        <div className="relative z-0">
-          <Contact />
-          <StarsCanvas />
-        </div>
-        <div className="relative z-0">
-          <Footer />
-        </div>
-      </div>
-      <BackToTopButton />
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-      />
-    </BrowserRouter>
-  );
-};
-
-export default App;
+export default function App() {
+  return <MotionProvider>
+    <a className="skip-link" href="#main">Skip to content</a>
+    <Navbar />
+    <main id="main"><Hero /><About /><Projects /><Experience /><Tech /><Awards /><Contact /></main>
+    <Footer />
+    <ToastContainer position="bottom-right" theme="dark" autoClose={5000} />
+  </MotionProvider>;
+}

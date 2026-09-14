@@ -30,13 +30,13 @@ import novitech from "./company/novitech.png";
 import dotworld from "./company/dotworld.png";
 import accenttechnosoft from "./company/accenttechnosoft.png";
 
-import crowdfunding from "./projects/crowdfunding.jpg";
-import quora_project from "./projects/quora-project.png";
-import portfoliomailer from "./projects/portfoliomailer.jpg";
-import blog_web from "./projects/blog_web.jpg";
-import portfolio_cms from "./projects/portfolio_cms.jpg";
-import backenkarchitecture from "./projects/backenkarchitecture.jpg";
-import threejs_portfolio from "./projects/threejs_portfolio.jpg";
+const crowdfunding = "/images/crowdfunding.webp";
+const quora_project = "/images/quora-project.webp";
+const portfoliomailer = "/images/portfoliomailer.webp";
+const blog_web = "/images/blog_web.webp";
+const portfolio_cms = "/images/portfolio_cms.webp";
+const backenkarchitecture = "/images/backenkarchitecture.webp";
+const threejs_portfolio = "/images/threejs_portfolio.webp";
 
 import elonmusk from "./peoples/musk.jpeg";
 import apj_kalam from "./peoples/apj-kalam.jpeg";
@@ -48,8 +48,8 @@ import gmail from "./social/gmail.png";
 import instagram from "./social/instagram.png";
 
 // Awards
-import best_teamof_year from "./awards/best_teamof_year.jpg";
-import givicert from "./awards/givicert.png";
+const best_teamof_year = "/images/best_teamof_year.webp";
+const givicert = "/images/givicert.webp";
 
 
 export {

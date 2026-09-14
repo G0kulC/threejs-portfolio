@@ -1,105 +1,34 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { motion, useScroll } from "framer-motion";
+import { FiArrowUpRight, FiMenu, FiX, FiPause, FiPlay } from "react-icons/fi";
+import { useMotionPreference } from "../Motion";
 
-import { styles } from "../../styles";
-import { navLinks } from "../../constants";
-import { menu, close } from "../../assets";
-import { personalDetails } from "../../constants";
-
-const Navbar = () => {
+const links = [["about", "About"], ["projects", "Work"], ["work", "Experience"], ["contact", "Contact"]];
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
-  const [toggle, setToggle] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
+  const menuButton = useRef(null);
+  const { enabled, reduced, toggle } = useMotionPreference();
+  const { scrollYProgress } = useScroll();
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      if (scrollTop > 100) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) setActive(entry.target.id); });
+    }, { rootMargin: "-15% 0px -55% 0px" });
+    links.forEach(([id]) => { const element = document.getElementById(id); if (element) observer.observe(element); });
+    return () => observer.disconnect();
   }, []);
-
-  return (
-    <nav
-      className={`${
-        styles.paddingX
-      } w-full flex items-center py-4 fixed top-0 z-20 transition-all duration-300 ${
-        scrolled ? "bg-primary shadow-md" : "bg-transparent"
-      }`}
-    >
-      <div className="w-full flex justify-between items-center max-w-7xl mx-auto px-4 sm:px-8">
-        <Link
-          to="/"
-          className="flex items-center gap-2"
-          onClick={() => {
-            setActive("");
-            window.scrollTo(0, 0);
-            window.location.reload();
-          }}
-        >
-          {/* Logo or Name */}
-          <p className="text-white text-[22px] sm:text-[28px] font-bold cursor-pointer">
-            {personalDetails.name}
-          </p>
-        </Link>
-
-        {/* Desktop Links */}
-        <ul className="hidden md:flex flex-row gap-6">
-          {navLinks.map((nav) => (
-            <li
-              className={`${
-                active === nav.title ? "text-white" : "text-secondary"
-              } hover:text-white text-[14px] sm:text-[16px] font-medium cursor-pointer`}
-              onClick={() => setActive(nav.title)}
-            >
-              <a href={`#${nav.id}`}>{nav.title}</a>
-            </li>
-          ))}
-        </ul>
-
-        {/* Mobile Menu Toggle */}
-        <div className="md:hidden flex items-center">
-          <img
-            src={toggle ? close : menu}
-            alt="menu"
-            className="w-7 h-7 cursor-pointer"
-            onClick={() => setToggle(!toggle)}
-          />
-          {/* Mobile Dropdown Menu */}
-          <div
-            className={`absolute top-16 right-4 w-[75%] max-w-xs rounded-lg shadow-lg z-20 bg-primary transform transition-all duration-300 ease-in-out ${
-              toggle
-                ? "translate-y-0 opacity-100 scale-100"
-                : "-translate-y-5 opacity-0 scale-95"
-            }`}
-          >
-            <ul className="flex flex-col gap-4 text-left p-5">
-              {navLinks.map((nav) => (
-                <li
-                  className={`${
-                    active === nav.title ? "text-white" : "text-secondary"
-                  } font-medium text-[16px] cursor-pointer`}
-                  onClick={() => {
-                    setToggle(!toggle);
-                    setActive(nav.title);
-                  }}
-                >
-                  <a href={`#${nav.id}`}>{nav.title}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </nav>
-  );
-};
-
-export default Navbar;
+  useEffect(() => {
+    const close = event => { if (event.key === "Escape" && open) { setOpen(false); menuButton.current?.focus(); } };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, [open]);
+  return <header className="site-header">
+    <div className="nav-inner shell">
+      <a href="#home" className="wordmark" aria-label="Gokul, back to top" onClick={() => setOpen(false)}>gokul<span>.</span></a>
+      <nav className="desktop-nav" aria-label="Main navigation">{links.map(([id, title]) => <a key={id} href={`#${id}`} aria-current={active === id ? "location" : undefined}>{title}</a>)}</nav>
+      <div className="nav-actions"><button className="motion-toggle" onClick={toggle} disabled={reduced} aria-label={reduced ? "Motion disabled by system preference" : enabled ? "Pause animations" : "Enable animations"} aria-pressed={!enabled} title={reduced ? "Reduced motion preference enabled" : enabled ? "Pause animations" : "Enable animations"}>{enabled ? <FiPause /> : <FiPlay />}</button><a className="nav-contact" href="#contact">Let&apos;s talk <FiArrowUpRight /></a><button ref={menuButton} className="menu-toggle" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen(!open)}>{open ? <FiX /> : <FiMenu />}</button></div>
+    </div>
+    {open && <nav id="mobile-nav" className="mobile-nav" aria-label="Mobile navigation">{links.map(([id, title]) => <a key={id} href={`#${id}`} onClick={() => setOpen(false)}>{title}<FiArrowUpRight /></a>)}</nav>}
+    <motion.div className="scroll-progress" style={{ scaleX: scrollYProgress }} />
+  </header>;
+}
