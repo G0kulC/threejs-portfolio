@@ -1,6 +1,6 @@
 import { Component, lazy, Suspense, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { FiArrowDown, FiArrowDownRight, FiArrowUpRight } from "react-icons/fi";
+import { FiArrowDown, FiArrowDownRight, FiArrowUpRight, FiDownload } from "react-icons/fi";
 import { personalDetails } from "../../constants";
 import { useMotionPreference } from "../Motion";
 
@@ -28,7 +28,7 @@ export default function Hero() {
           I build practical AI systems that solve real-world problems, automate workflows, and turn ideas into production-ready applications.<br />
           Specializing in <strong>Generative AI, RAG, Agentic AI, AI Automation, Machine Learning, and Python-based backend systems.</strong>
         </p>
-        <div className="hero-buttons"><a href="#projects" className="button button-primary">Explore my work <FiArrowDownRight /></a><a className="text-link" href={personalDetails.resume_link} target="_blank" rel="noopener noreferrer">View résumé <FiArrowUpRight /></a></div>
+        <div className="hero-buttons"><a href="#projects" className="button button-primary">Explore my work <FiArrowDownRight /></a><a className="text-link" href={personalDetails.resume_link} target="_blank" rel="noopener noreferrer">Download Résumé <FiDownload /></a></div>
       </motion.div>
       <div className="hero-art-stage" aria-hidden="true">
         <motion.div className="hero-art" style={{ y: enabled ? sculptureY : 0, rotate: enabled ? rotate : 0 }}>
