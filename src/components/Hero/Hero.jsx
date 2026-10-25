@@ -1,10 +1,12 @@
-import { Component, lazy, Suspense, useRef } from "react";
+import { Component, lazy, Suspense, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { FiArrowDown, FiArrowDownRight, FiArrowUpRight, FiDownload } from "react-icons/fi";
 import { personalDetails } from "../../constants";
 import { useMotionPreference } from "../Motion";
 
 const NeuralCanvas = lazy(() => import("../canvas/NeuralCanvas"));
+// Phones hide the sculpture in CSS, so skip loading the WebGL scene there too
+const isPhone = () => typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches;
 class SceneBoundary extends Component {
   state = { failed: false };
   static getDerivedStateFromError() { return { failed: true }; }
@@ -13,6 +15,7 @@ class SceneBoundary extends Component {
 export default function Hero() {
   const ref = useRef(null);
   const { enabled } = useMotionPreference();
+  const [phone] = useState(isPhone);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const sculptureY = useTransform(scrollYProgress, [0, 1], [0, 36]);
   const textY = useTransform(scrollYProgress, [0, 1], [0, 48]);
@@ -32,8 +35,8 @@ export default function Hero() {
       </motion.div>
       <div className="hero-art-stage" aria-hidden="true">
         <motion.div className="hero-art" style={{ y: enabled ? sculptureY : 0, rotate: enabled ? rotate : 0 }}>
-          <img className="neural-fallback" src="/images/neural-form.webp" alt="" width="1024" height="1024" fetchpriority="high" />
-          {enabled && <SceneBoundary><Suspense fallback={null}><NeuralCanvas /></Suspense></SceneBoundary>}
+          {!phone && <img className="neural-fallback" src="/images/neural-form.webp" alt="" width="1024" height="1024" fetchpriority="high" />}
+          {enabled && !phone && <SceneBoundary><Suspense fallback={null}><NeuralCanvas /></Suspense></SceneBoundary>}
         </motion.div>
         <div className="art-caption mono"><span className="crosshair">+</span> CURRENTLY FOCUSED ON<br /><span>GENAI · AGENTS · RAG</span></div>
       </div>
